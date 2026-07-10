@@ -1,15 +1,13 @@
+import streamlit as st
 from huggingface_hub import InferenceClient
-import os
-client = InferenceClient(token=os.environ.get("HUGGINGFACE_TOKEN"))
 
-# Change: Add 'prompt' as an argument here
+# Retrieve the key from Streamlit Secrets
+api_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
+# Pass the key to the client
+client = InferenceClient(api_key=api_key)
+
 def generate_banner(prompt):
-    print("Generating... please wait.")
+    # Now this will work because 'client' has the key
     image = client.text_to_image(prompt, model="black-forest-labs/FLUX.1-schnell")
-    image.save("banner.png")
-    print("Success! 'banner.png' has been created.")
-
-if __name__ == "__main__":
-    # This part only runs if you run this file directly in terminal
-    user_prompt = input("Enter your banner description: ")
-    generate_banner(user_prompt)
+    return image
