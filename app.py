@@ -12,19 +12,15 @@ st.subheader("Professional AI Visuals")
 user_prompt = st.text_input("Enter your banner description:")
 
 # Button to trigger the generation
-if st.button("Generate Image"):
-    if user_prompt:
-        with st.spinner('Generating... please wait.'):
-            # This calls the function we prepared in generate.py
-       # Replace lines 19–22 with this:
-
-# 19: Capture the result in a variable called 'image'
-image = generate_banner(user_prompt)
-
+    if st.button("Generate Image"):
+        if user_prompt:
+            with st.spinner('Generating... please wait.'):
+               image = generate_banner(user_prompt)  # Indented here
+                if image:                             # Indented here
+                    st.image(image, caption="Generated Banner") # Indented here
+                    st.success("Success! Image created.")       # Indented here
 # 20: Display the image returned by the function
-if image:
-    st.image(image, caption="Generated Banner")
-    st.success("Success! Image created.")   
+
             
             
           
