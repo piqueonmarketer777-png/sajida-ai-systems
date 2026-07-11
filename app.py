@@ -11,8 +11,7 @@ st.subheader("Professional AI Visuals")
 # Input field for the user to type their prompt
 user_prompt = st.text_input("Enter your banner description:")
 
-# Button to trigger the generation
-    if st.button("Generate Image"):
+# Button to trigger the generationif st.button("Generate Image"):
         if user_prompt:
             with st.spinner('Generating... please wait.'):
                image = generate_banner(user_prompt)  # Indented here
