@@ -1,13 +1,13 @@
-import streamlit as st
 from huggingface_hub import InferenceClient
-
-# Retrieve the key from Streamlit Secrets
-api_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
-
-# Pass the key to the client
-client = InferenceClient(api_key=api_key)
+import streamlit as st
 
 def generate_banner(prompt):
-    # Now this will work because 'client' has the key
+    # Retrieve the key from Streamlit Secrets
+    api_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    client = InferenceClient(api_key=api_key)
+    
+    # Generate the image
     image = client.text_to_image(prompt, model="black-forest-labs/FLUX.1-schnell")
+    
+    # IMPORTANT: You must return the image!
     return image
