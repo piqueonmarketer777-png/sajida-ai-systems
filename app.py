@@ -16,11 +16,18 @@ if st.button("Generate Image"):
     if user_prompt:
         with st.spinner('Generating... please wait.'):
             # This calls the function we prepared in generate.py
-            generate_banner(user_prompt)
+       # Replace lines 19–22 with this:
+
+# 19: Capture the result in a variable called 'image'
+image = generate_banner(user_prompt)
+
+# 20: Display the image returned by the function
+if image:
+    st.image(image, caption="Generated Banner")
+    st.success("Success! Image created.")   
             
-            # Display the generated image
-            st.image("banner.png", caption="Generated Banner")
-            st.success("Success! 'banner.png' has been created.")
+            
+          
         
         # New code added here:
         with open("banner.png", "rb") as file:
