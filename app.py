@@ -11,26 +11,21 @@ st.subheader("Professional AI Visuals")
 # Input field for the user to type their prompt
 user_prompt = st.text_input("Enter your banner description:")
 
-# Button to trigger the generationif st.button("Generate Image"):
-        if user_prompt:
-            with st.spinner('Generating... please wait.'):
-               image = generate_banner(user_prompt)  # Indented here
-                if image:                             # Indented here
-                    st.image(image, caption="Generated Banner") # Indented here
-                    st.success("Success! Image created.")       # Indented here
-# 20: Display the image returned by the function
-
-            
-            
-          
-        
-        # New code added here:
-        with open("banner.png", "rb") as file:
-            st.download_button(
-                label="Download Image",
-                data=file,
-                file_name="banner.png",
-                mime="image/png"
-            )
+# Button to trigger the generation
+if st.button("Generate Image"):
+    if user_prompt:
+        with st.spinner('Generating... please wait.'):
+            image = generate_banner(user_prompt)
+            if image:
+                st.image(image, caption="Generated Banner")
+                st.success("Success! Image created.")
+                
+                # Download button for the generated image
+                st.download_button(
+                    label="Download Image",
+                    data=image,
+                    file_name="generated_banner.png",
+                    mime="image/png"
+                )
     else:
         st.warning("Please enter a description first.")
