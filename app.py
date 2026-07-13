@@ -1,4 +1,4 @@
-from st_paywall import add_auth
+#from st_paywall import add_auth
 import streamlit as st
 from generate import generate_banner
 
