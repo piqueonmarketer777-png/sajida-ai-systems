@@ -1,5 +1,9 @@
+from st_paywall import add_auth
 import streamlit as st
 from generate import generate_banner
+
+# Activate the paywall
+add_auth(required=True)
 
 # Set the page title
 st.set_page_config(page_title="Sajida AI Systems")
