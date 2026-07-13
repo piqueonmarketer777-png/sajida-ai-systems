@@ -3,7 +3,7 @@ import streamlit as st
 from generate import generate_banner
 
 # Activate the paywall
-add_auth(required=True)
+#add_auth(required=True)
 
 # Set the page title
 st.set_page_config(page_title="Sajida AI Systems")
