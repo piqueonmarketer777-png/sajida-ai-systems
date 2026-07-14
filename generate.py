@@ -7,7 +7,8 @@ def generate_banner(prompt):
     client = InferenceClient(api_key=api_key)
     
     # Generate the image
-    image = client.text_to_image(prompt, model="black-forest-labs/FLUX.1-schnell")
+   # Change from FLUX.1-schnell to this:
+image = client.text_to_image(prompt, model="stabilityai/stable-diffusion-2-1")
     
     # IMPORTANT: You must return the image!
     return image
