@@ -1,15 +1,20 @@
-#from st_paywall import add_auth
+# from st_paywall import add_auth
 import streamlit as st
 from generate import generate_banner
+
 # Activate the paywall
-#add_auth(required=True)
+# add_auth(required=True)
+
 # Set the page title
 st.set_page_config(page_title="Sajida AI Systems")
+
 # Title and Subheader
 st.title("Sajida AI Systems - Image Generator")
 st.subheader("Professional AI Visuals")
+
 # Input field for the user to type their prompt
 user_prompt = st.text_input("Enter your banner description:")
+
 # Button to trigger the generation
 if st.button("Generate Image"):
     if user_prompt:
@@ -18,7 +23,7 @@ if st.button("Generate Image"):
             if image:
                 st.image(image, caption="Generated Banner")
                 st.success("Success! Image created.")
-                
+
                 # Download button for the generated image
                 st.download_button(
                     label="Download Image",
