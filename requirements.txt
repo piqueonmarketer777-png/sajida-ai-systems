@@ -1,3 +1,5 @@
 streamlit
-huggingface_hub
-st-paywall
+
+requests
+
+pillow
