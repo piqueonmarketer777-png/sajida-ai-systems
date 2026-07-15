@@ -1,6 +1,6 @@
 import streamlit as st
 from generate import generate_banner
- st.set_page_config(page_title="Sajida AI Systems")
+st.set_page_config(page_title="Sajida AI Systems")
 
 st.title("Sajida AI Systems - Image Generator")
 st.subheader("Professional AI Visuals")
