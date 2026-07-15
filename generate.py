@@ -1,11 +1,17 @@
-from huggingface_hub import InferenceClient
+import requests
 import streamlit as st
+import io
+from PIL import Image
 
 def generate_banner(prompt):
     api_key = st.secrets["HUGGINGFACE_API_TOKEN"]
-    # We initialize the client to use the specific Inference API URL
-    client = InferenceClient(model="runwayml/stable-diffusion-v1-5", token=api_key)
+    api_url = "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5"
+    headers = {"Authorization": f"Bearer {api_key}"}
     
-    # We use the task-specific call which is more stable
-    image = client.text_to_image(prompt)
-    return image
+    response = requests.post(api_url, headers=headers, json={"inputs": prompt})
+    
+    if response.status_code == 200:
+        return Image.open(io.BytesIO(response.content))
+    else:
+        st.error(f"Error: {response.status_code} - {response.text}")
+        return None
