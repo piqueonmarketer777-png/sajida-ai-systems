@@ -3,9 +3,9 @@ import streamlit as st
 
 def generate_banner(prompt):
     api_key = st.secrets["HUGGINGFACE_API_TOKEN"]
-    # Initialize without specifying the model in the client
-    client = InferenceClient(token=api_key)
+    # We initialize the client to use the specific Inference API URL
+    client = InferenceClient(model="runwayml/stable-diffusion-v1-5", token=api_key)
     
-    # Force the use of the specific model via the API endpoint
-    image = client.text_to_image(prompt, model="runwayml/stable-diffusion-v1-5")
+    # We use the task-specific call which is more stable
+    image = client.text_to_image(prompt)
     return image
