@@ -1,14 +1,22 @@
 import streamlit as st
-from huggingface_hub import InferenceClient
+import torch
+from diffusers import StableDiffusionPipeline
 
 def generate_banner(prompt):
     try:
-        api_key = st.secrets["HUGGINGFACE_API_TOKEN"]
-        client = InferenceClient(model="runwayml/stable-diffusion-v1-5", token=api_key)
-        # Using a more stable model ID
+        # Load the stable diffusion model
+        model_id = "runwayml/stable-diffusion-v1-5"
+        pipe = StableDiffusionPipeline.from_pretrained(
+            model_id, 
+            torch_dtype=torch.float32
+        )
         
-       image = client.text_to_image(prompt)
+        # Move to CPU since free spaces usually don't have GPUs
+        pipe = pipe.to("cpu")
+        
+        # Generate the image
+        image = pipe(prompt).images[0]
         return image
     except Exception as e:
-        st.error(f"Hugging Face is currently busy or the model is unavailable. Please try again in a moment. (Error: {e})")
+        st.error(f"Generation error: {e}")
         return None
