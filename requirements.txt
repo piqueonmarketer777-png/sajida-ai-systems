@@ -1,3 +1,4 @@
 streamlit
-requests
-Pillow
+torch
+torchvision
+diffusers
