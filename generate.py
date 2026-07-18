@@ -6,7 +6,8 @@ def generate_banner(prompt):
         api_key = st.secrets["HUGGINGFACE_API_TOKEN"]
         client = InferenceClient(model="runwayml/stable-diffusion-v1-5", token=api_key)
         # Using a more stable model ID
-        image = client.text_to_image(prompt, model="runwayml/stable-diffusion-v1-5")
+        
+       image = client.text_to_image(prompt)
         return image
     except Exception as e:
         st.error(f"Hugging Face is currently busy or the model is unavailable. Please try again in a moment. (Error: {e})")
