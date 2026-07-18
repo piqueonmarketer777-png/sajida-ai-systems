@@ -7,5 +7,5 @@ def generate_banner(prompt):
     client = InferenceClient(api_key=api_key)
     
     # We use a public model that is usually allowed
-    image = client.text_to_image(prompt, model="stabilityai/stable-diffusion-2-1")
+   image = client.text_to_image(prompt, model="stabilityai/stable-diffusion-xl-base-1.0")
     return image
