@@ -4,14 +4,15 @@ from diffusers import StableDiffusionPipeline
 
 def generate_banner(prompt):
     try:
-        # Load the stable diffusion model
+        # Load the model with optimizations for low-memory environments
         model_id = "runwayml/stable-diffusion-v1-5"
         pipe = StableDiffusionPipeline.from_pretrained(
             model_id, 
-            torch_dtype=torch.float32
+            torch_dtype=torch.float32,
+            low_cpu_mem_usage=True # Add this optimization
         )
         
-        # Move to CPU since free spaces usually don't have GPUs
+        # Explicitly move to CPU
         pipe = pipe.to("cpu")
         
         # Generate the image
