@@ -4,7 +4,7 @@ from huggingface_hub import InferenceClient
 def generate_banner(prompt):
     try:
         api_key = st.secrets["HUGGINGFACE_API_TOKEN"]
-        client = InferenceClient(api_key=api_key)
+        client = InferenceClient(model="runwayml/stable-diffusion-v1-5", token=api_key)
         # Using a more stable model ID
         image = client.text_to_image(prompt, model="runwayml/stable-diffusion-v1-5")
         return image
