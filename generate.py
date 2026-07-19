@@ -1,23 +1,22 @@
 import streamlit as st
-import torch
-from diffusers import StableDiffusionPipeline
+import requests
+from io import BytesIO
+from PIL import Image
+import urllib.parse
 
 def generate_banner(prompt):
     try:
-        # Load the model with optimizations for low-memory environments
-        model_id = "runwayml/stable-diffusion-v1-5"
-        pipe = StableDiffusionPipeline.from_pretrained(
-            model_id, 
-            torch_dtype=torch.float32,
-            low_cpu_mem_usage=True # Add this optimization
-        )
+        encoded_prompt = urllib.parse.quote(prompt)
+        api_url = f"https://image.pollinations.ai/p/{encoded_prompt}?model=flux"
         
-        # Explicitly move to CPU
-        pipe = pipe.to("cpu")
+        response = requests.get(api_url, timeout=30)
         
-        # Generate the image
-        image = pipe(prompt).images[0]
-        return image
+        if response.status_code == 200:
+            image = Image.open(BytesIO(response.content))
+            return image
+        else:
+            st.error("Could not generate image.")
+            return None
     except Exception as e:
-        st.error(f"Generation error: {e}")
+        st.error(f"Error: {e}")
         return None
